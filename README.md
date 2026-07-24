@@ -158,11 +158,12 @@ npm start
 src/
 ├── config/
 ├── controllers/
-├── lib/
+├── db/
 ├── repositories/
 ├── routes/
 ├── services/
 └── types/
+└── generated/ --> prisma generated types. Not synced
 
 prisma/
 ├── migrations/

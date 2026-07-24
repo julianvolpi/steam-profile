@@ -1,5 +1,5 @@
 import type { SteamUser } from "../types/steamUser.js";
-import { prisma } from "../lib/prisma.js";
+import { prisma } from "../db/prisma.js";
 
 export const findBySteamId = async (steamId: string) => {
   try {

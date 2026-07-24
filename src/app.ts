@@ -2,7 +2,7 @@ import "./config/dotenv.js";
 import express from "express";
 import passport from "./config/passport.js";
 import authRoutes from "./routes/auth.routes.js";
-import { prisma } from "./lib/prisma.js";
+import { prisma } from "./db/prisma.js";
 
 const app = express();
 const port = Number(process.env.PORT) || 4000;

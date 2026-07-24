@@ -5,9 +5,9 @@ export interface SteamUser {
       steamid: string;
       personaname: string;
       profileurl: string;
-      avatar: string;
-      avatarmedium: string;
-      avatarfull: string;
+      avatar?: string;
+      avatarmedium?: string;
+      avatarfull?: string;
       realname: string;
       primaryclanid: string;
       timecreated: number;

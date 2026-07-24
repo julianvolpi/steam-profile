@@ -1,0 +1,39 @@
+{
+  "name": "steam-profile",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Julian Volpi",
+  "type": "module",
+  "main": "app.ts",
+  "scripts": {
+    "dev": "tsx watch src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "db:start": "docker compose up -d",
+    "db:stop": "docker compose down",
+    "db:logs": "docker compose logs -f postgres",
+    "db:deploy": "prisma migrate deploy",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.9.0",
+    "@prisma/client": "^7.9.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "passport": "^0.7.0",
+    "passport-steam": "^1.0.18",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.1.1",
+    "@types/passport": "^1.0.17",
+    "@types/passport-steam": "^1.0.6",
+    "prisma": "^7.9.0",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2"
+  }
+}

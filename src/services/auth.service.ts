@@ -1,20 +1,20 @@
 import {
   createSteamUser,
+  findById,
   findBySteamId,
 } from "../repositories/user.repository.js";
-import type { SteamUser } from "../types/steamUser.js";
+import type { PassportSteamUser } from "../types/passportSteamUser.js";
 
-export const loginWithSteam = async (steamUser: SteamUser) => {
-  let user = await findBySteamId(steamUser.steamId);
+export const loginWithSteam = async (steamUser: PassportSteamUser) => {
+  let user = await findBySteamId(steamUser.identifier);
 
   if (!user) {
-    console.log(
-      "Creating user",
-      steamUser.steamId,
-      steamUser.profile.displayName,
-    );
     user = await createSteamUser(steamUser);
   }
 
   return user;
+};
+
+export const getCurrentUser = async (userId: number) => {
+  return await findById(userId);
 };

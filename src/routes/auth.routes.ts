@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
-import { callback } from "../controllers/auth.controller.js";
+import { callback, me } from "../controllers/auth.controller.js";
+import { authMiddleware } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
@@ -13,5 +14,6 @@ router.get(
   }),
   callback,
 );
+router.get("/me", authMiddleware, me);
 
 export default router;

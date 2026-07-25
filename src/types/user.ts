@@ -1,9 +1,9 @@
 export interface User {
-  id: string;
+  id: number;
   steamId: string;
   displayName: string;
-  avatar: string;
-  avatarMedium: string;
-  avatarFull: string;
+  avatar?: string;
+  avatarMedium?: string;
+  avatarFull?: string;
   createdAt: string;
 }

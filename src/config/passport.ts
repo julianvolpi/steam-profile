@@ -10,7 +10,7 @@ passport.use(
     },
     (_, profile, done) => {
       done(null, {
-        steamId: profile.id,
+        identifier: profile.id,
         profile,
       });
     },

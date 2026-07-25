@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { getCurrentUser, loginWithSteam } from "../services/auth.service.js";
+import { getCurrentUser, loginWithSteam } from "./auth.service.js";
 import { createToken } from "../utils/jwt.js";
 
 export const callback = async (req: Request, res: Response) => {

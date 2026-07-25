@@ -1,8 +1,4 @@
-import {
-  createSteamUser,
-  findById,
-  findBySteamId,
-} from "../repositories/user.repository.js";
+import { createSteamUser, findById, findBySteamId } from "./user.repository.js";
 import type { PassportSteamUser } from "../types/passportSteamUser.js";
 
 export const loginWithSteam = async (steamUser: PassportSteamUser) => {

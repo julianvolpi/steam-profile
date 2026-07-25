@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-import { callback, me } from "../controllers/auth.controller.js";
+import { callback, me } from "./auth.controller.js";
 import { authMiddleware } from "../middleware/auth.middleware.js";
 
 const router = express.Router();

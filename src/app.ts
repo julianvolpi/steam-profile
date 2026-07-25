@@ -2,6 +2,7 @@ import "./config/dotenv.js";
 import express from "express";
 import passport from "./config/passport.js";
 import authRoutes from "./routes/auth.routes.js";
+import { errorHandler } from "./middleware/error.middleware.js";
 
 const app = express();
 
@@ -17,5 +18,7 @@ app.get("/", (_req, res) => {
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
+
+app.use(errorHandler);
 
 export default app;

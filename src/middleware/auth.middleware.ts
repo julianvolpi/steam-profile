@@ -15,12 +15,12 @@ export const authMiddleware = (
     return res.sendStatus(401);
   }
 
-  const payload = verifyToken(token);
-  if (!payload || typeof payload === "string") {
+  try {
+    const payload = verifyToken(token);
+    req.auth = payload;
+
+    next();
+  } catch {
     return res.sendStatus(401);
   }
-
-  req.auth = payload;
-
-  next();
 };

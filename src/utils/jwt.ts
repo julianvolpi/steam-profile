@@ -12,7 +12,7 @@ export const createToken = (userId: number, steamId: string): string => {
 
   return jwt.sign(
     {
-      sub: userId,
+      sub: userId.toString(),
       steamId,
     },
     secret,

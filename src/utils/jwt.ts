@@ -17,7 +17,7 @@ export const createToken = (userId: number, steamId: string): string => {
     },
     secret,
     {
-      expiresIn: expiresIn,
+      expiresIn,
     },
   );
 };

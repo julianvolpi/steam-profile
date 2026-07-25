@@ -1,6 +1,5 @@
 import "express";
-import type { JwtPayload } from "./jwtPayload.js";
-import type { PassportSteamUser } from "./passportSteamUser.js";
+import type { PassportSteamUser, JwtPayload } from "../auth/auth.types.js";
 
 declare global {
   namespace Express {

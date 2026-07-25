@@ -13,8 +13,8 @@ export const callback = async (req: Request, res: Response) => {
 };
 
 export const me = async (req: Request, res: Response) => {
-  const jwtPayload = Number(req.auth.sub);
-  const user = await getCurrentUser(jwtPayload);
+  const userId = Number(req.auth.sub);
+  const user = await getCurrentUser(userId);
 
   if (!user) {
     return res.sendStatus(404);

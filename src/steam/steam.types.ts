@@ -1,3 +1,16 @@
+export interface SteamOwnedGame {
+  appid: number;
+  playtime_forever: number;
+  playtime_2weeks?: number;
+}
+
+export interface SteamOwnedGamesResponse {
+  response: {
+    game_count: number;
+    games: SteamOwnedGame[];
+  };
+}
+
 export interface SteamProfile {
   provider: "steam";
   _json: {
@@ -23,9 +36,4 @@ export interface SteamProfile {
   id: string;
   displayName: string;
   photos: Array<{ value: string }>;
-}
-
-export interface PassportSteamUser {
-  identifier: string;
-  profile: SteamProfile;
 }

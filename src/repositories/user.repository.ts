@@ -1,6 +1,6 @@
 import { prisma } from "../db/prisma.js";
 import type { UserModel } from "../generated/prisma/models.js";
-import type { PassportSteamUser } from "../types/passportSteamUser.js";
+import type { PassportSteamUser } from "../auth/auth.types.js";
 
 export const findById = async (id: number) => {
   return await prisma.user.findUnique({

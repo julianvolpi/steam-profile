@@ -2,10 +2,10 @@ export interface Game {
   id: number;
   name: string;
   playtimeForever: number;
-  iconUrl: string;
+  imageUrl: string;
 
   playtime2weeks: number | undefined;
-  rtimeLastPlayed: number | undefined;
+  lastPlayedAt?: Date | undefined;
   hasCommunityVisibleStats: boolean | undefined;
   hasLeaderboards: boolean | undefined;
   contentDescriptorIds: number[] | undefined;

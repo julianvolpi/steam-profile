@@ -5,9 +5,11 @@ export const toGame = (steamGame: SteamOwnedGame): Game => ({
   id: steamGame.appid,
   name: steamGame.name,
   playtimeForever: steamGame.playtime_forever,
-  iconUrl: steamGame.img_icon_url,
+  imageUrl: `https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/${steamGame.appid}/library_600x900.jpg`,
   playtime2weeks: steamGame.playtime_2weeks,
-  rtimeLastPlayed: steamGame.rtime_last_played,
+  lastPlayedAt: steamGame.rtime_last_played
+    ? new Date(steamGame.rtime_last_played * 1000)
+    : undefined,
   hasCommunityVisibleStats: steamGame.has_community_visible_stats,
   hasLeaderboards: steamGame.has_leaderboards,
   contentDescriptorIds: steamGame.content_descriptorids,

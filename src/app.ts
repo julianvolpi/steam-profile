@@ -14,7 +14,9 @@ app.use("/auth", authRoutes);
 app.use("/games", gamesRoutes);
 
 app.get("/", (_req, res) => {
-  res.send("Hello from Express server");
+  res.send(
+    "<html><body><h1>Steam Profile</h1><button onclick=\"window.location.href='/auth/steam'\">Login with Steam</button></body></html>",
+  );
 });
 
 app.get("/health", (_req, res) => {

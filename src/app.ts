@@ -3,6 +3,7 @@ import express from "express";
 import passport from "./config/passport.js";
 import authRoutes from "./auth/auth.routes.js";
 import gamesRoutes from "./games/games.routes.js";
+import usersRoutes from "./users/users.routes.js";
 import { errorHandler } from "./middleware/error.middleware.js";
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(passport.initialize());
 
 app.use("/auth", authRoutes);
 app.use("/games", gamesRoutes);
+app.use("/users", usersRoutes);
 
 app.get("/", (_req, res) => {
   res.send(

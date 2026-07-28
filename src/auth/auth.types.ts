@@ -1,8 +1,8 @@
-import type { SteamProfile } from "../steam/steam.types.js";
+import type { SteamUser } from "../steam/steam.types.js";
 
 export interface PassportSteamUser {
   identifier: string;
-  profile: SteamProfile;
+  profile: SteamUser;
 }
 
 export interface JwtPayload {

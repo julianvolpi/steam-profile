@@ -1,5 +1,8 @@
 import { STEAM_API_BASE_URL } from "./steam.constants.js";
-import type { SteamOwnedGamesResponse } from "./steam.types.js";
+import type {
+  SteamOwnedGamesResponse,
+  SteamPlayerSummaryResponse,
+} from "./steam.types.js";
 import { getJson } from "./steam.http.js";
 
 export const getOwnedGames = async (
@@ -19,4 +22,21 @@ export const getOwnedGames = async (
   }).toString();
 
   return getJson<SteamOwnedGamesResponse>(url);
+};
+
+export const getPlayerSummaries = async (
+  steamIds: string[],
+): Promise<SteamPlayerSummaryResponse> => {
+  const url = new URL(
+    "/ISteamUser/GetPlayerSummaries/v0002/",
+    STEAM_API_BASE_URL,
+  );
+
+  url.search = new URLSearchParams({
+    key: process.env.STEAM_API_KEY!,
+    steamids: steamIds.join(","),
+    format: "json",
+  }).toString();
+
+  return getJson<SteamPlayerSummaryResponse>(url);
 };

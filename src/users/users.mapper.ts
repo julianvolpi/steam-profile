@@ -19,9 +19,12 @@ export const toUserProfile = (steamUser: SteamProfile): UserProfile => {
     countryCode: steamUser.loccountrycode,
     stateCode: steamUser.locstatecode,
     cityId: steamUser.loccityid,
-    currentGame: {
-      appId: steamUser.gameid,
-      name: steamUser.gameextrainfo,
-    },
+    currentGame:
+      steamUser.gameid && steamUser.gameextrainfo
+        ? {
+            appId: Number(steamUser.gameid),
+            name: steamUser.gameextrainfo,
+          }
+        : undefined,
   };
 };

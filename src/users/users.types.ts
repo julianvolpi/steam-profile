@@ -38,8 +38,10 @@ export interface UserProfile {
   stateCode?: string;
   cityId?: number | undefined;
 
-  currentGame?: {
-    appId: string | undefined;
-    name: string | undefined;
-  };
+  currentGame?:
+    | {
+        appId: number | undefined;
+        name: string | undefined;
+      }
+    | undefined;
 }

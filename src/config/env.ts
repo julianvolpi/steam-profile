@@ -10,10 +10,26 @@ const required = (name: string): string => {
   return value;
 };
 
+function number(name: string, defaultValue: number): number {
+  const value = process.env[name];
+
+  if (!value) {
+    return defaultValue;
+  }
+
+  const parsed = Number(value);
+
+  if (Number.isNaN(parsed)) {
+    throw new Error(`Environment variable ${name} must be a number.`);
+  }
+
+  return parsed;
+}
+
 export const env = {
   nodeEnv: process.env.NODE_ENV ?? "development",
 
-  port: Number(process.env.PORT ?? 3000),
+  port: number("PORT", 3000),
 
   databaseUrl: required("DATABASE_URL"),
 

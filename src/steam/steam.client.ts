@@ -4,6 +4,7 @@ import type {
   SteamPlayerSummaryResponse,
 } from "./steam.types.js";
 import { getJson } from "./steam.http.js";
+import { env } from "../config/env.js";
 
 export const getOwnedGames = async (
   steamId: string,
@@ -14,7 +15,7 @@ export const getOwnedGames = async (
   );
 
   url.search = new URLSearchParams({
-    key: process.env.STEAM_API_KEY!,
+    key: env.steam.apiKey,
     steamid: steamId,
     include_appinfo: "true",
     include_played_free_games: "true",
@@ -33,7 +34,7 @@ export const getPlayerSummaries = async (
   );
 
   url.search = new URLSearchParams({
-    key: process.env.STEAM_API_KEY!,
+    key: env.steam.apiKey,
     steamids: steamIds.join(","),
     format: "json",
   }).toString();

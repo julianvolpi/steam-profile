@@ -1,14 +1,10 @@
 import jwt from "jsonwebtoken";
-import type { StringValue } from "ms";
-import type { JwtPayload } from "../types/jwtPayload.js";
+import type { JwtPayload } from "../auth/auth.types.js";
+import { env } from "../config/env.js";
 
 export const createToken = (userId: number, steamId: string): string => {
-  const secret = process.env.JWT_SECRET;
-  if (!secret) {
-    throw new Error("JWT_SECRET is not defined in the environment variables.");
-  }
-
-  const expiresIn = (process.env.JWT_EXPIRES_IN ?? "1h") as StringValue;
+  const secret = env.jwt.secret;
+  const expiresIn = env.jwt.expiresIn;
 
   return jwt.sign(
     {
@@ -23,12 +19,7 @@ export const createToken = (userId: number, steamId: string): string => {
 };
 
 export const verifyToken = (token: string): JwtPayload => {
-  const secret = process.env.JWT_SECRET;
-
-  if (!secret) {
-    throw new Error("JWT_SECRET is not defined.");
-  }
-
+  const secret = env.jwt.secret;
   const payload = jwt.verify(token, secret);
 
   if (typeof payload === "string") {

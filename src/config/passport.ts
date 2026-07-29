@@ -1,12 +1,13 @@
 import passport from "passport";
 import { Strategy as SteamStrategy } from "passport-steam";
+import { env } from "./env.js";
 
 passport.use(
   new SteamStrategy(
     {
-      returnURL: process.env.STEAM_RETURN_URL!,
-      realm: process.env.STEAM_REALM!,
-      apiKey: process.env.STEAM_API_KEY!,
+      returnURL: env.steam.returnURL,
+      realm: env.steam.realm,
+      apiKey: env.steam.apiKey,
     },
     (_, profile, done) => {
       done(null, {

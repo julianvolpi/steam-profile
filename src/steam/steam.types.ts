@@ -1,3 +1,8 @@
+export type SteamEndpoint =
+  | "GetFriendList"
+  | "GetOwnedGames"
+  | "GetPlayerSummaries";
+
 export interface SteamOwnedGame {
   appid: number;
   name: string;
@@ -48,6 +53,18 @@ export interface SteamUser {
   id: string;
   displayName: string;
   photos: Array<{ value: string }>;
+}
+
+export interface SteamFriend {
+  steamid: string;
+  relationship: "friend";
+  friend_since: number;
+}
+
+export interface SteamFriendsResponse {
+  friendslist: {
+    friends: SteamFriend[];
+  };
 }
 
 export interface SteamOwnedGamesResponse {

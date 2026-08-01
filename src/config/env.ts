@@ -13,7 +13,7 @@ const required = (name: string): string => {
 function number(name: string, defaultValue: number): number {
   const value = process.env[name];
 
-  if (!value) {
+  if (value === undefined) {
     return defaultValue;
   }
 

@@ -1,43 +1,51 @@
 import { STEAM_API_BASE_URL } from "./steam.constants.js";
 import type {
+  SteamFriendsResponse,
   SteamOwnedGamesResponse,
   SteamPlayerSummaryResponse,
 } from "./steam.types.js";
 import { getJson } from "./steam.http.js";
 import { env } from "../config/env.js";
 
+const buildUrl = (path: string, params: Record<string, string>): URL => {
+  const url = new URL(path, STEAM_API_BASE_URL);
+  url.search = new URLSearchParams({
+    ...params,
+    format: "json",
+    key: env.steam.apiKey,
+  }).toString();
+  return url;
+};
+
 export const getOwnedGames = async (
   steamId: string,
 ): Promise<SteamOwnedGamesResponse> => {
-  const url = new URL(
-    "/IPlayerService/GetOwnedGames/v0001/",
-    STEAM_API_BASE_URL,
-  );
-
-  url.search = new URLSearchParams({
-    key: env.steam.apiKey,
+  const url = buildUrl("/IPlayerService/GetOwnedGames/v0001/", {
     steamid: steamId,
     include_appinfo: "true",
     include_played_free_games: "true",
-    format: "json",
-  }).toString();
+  });
 
-  return getJson<SteamOwnedGamesResponse>(url);
+  return getJson<SteamOwnedGamesResponse>(url, "GetOwnedGames");
 };
 
 export const getPlayerSummaries = async (
   steamIds: string[],
 ): Promise<SteamPlayerSummaryResponse> => {
-  const url = new URL(
-    "/ISteamUser/GetPlayerSummaries/v0002/",
-    STEAM_API_BASE_URL,
-  );
-
-  url.search = new URLSearchParams({
-    key: env.steam.apiKey,
+  const url = buildUrl("/ISteamUser/GetPlayerSummaries/v0002/", {
     steamids: steamIds.join(","),
-    format: "json",
-  }).toString();
+  });
 
-  return getJson<SteamPlayerSummaryResponse>(url);
+  return getJson<SteamPlayerSummaryResponse>(url, "GetPlayerSummaries");
+};
+
+export const getPlayerFriends = async (
+  steamId: string,
+): Promise<SteamFriendsResponse> => {
+  const url = buildUrl("/ISteamUser/GetFriendList/v0001/", {
+    steamid: "76561197997211756",
+    relationship: "friend",
+  });
+
+  return getJson<SteamFriendsResponse>(url, "GetFriendList");
 };

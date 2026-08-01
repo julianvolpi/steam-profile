@@ -44,4 +44,6 @@ export interface UserProfile {
         name: string | undefined;
       }
     | undefined;
+
+  friendSince?: Date | undefined;
 }

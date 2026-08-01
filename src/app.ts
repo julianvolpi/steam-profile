@@ -1,10 +1,11 @@
 import "./config/dotenv.js";
 import express from "express";
+import { errorHandler } from "./middleware/error.middleware.js";
 import passport from "./config/passport.js";
 import authRoutes from "./auth/auth.routes.js";
 import gamesRoutes from "./games/games.routes.js";
 import usersRoutes from "./users/users.routes.js";
-import { errorHandler } from "./middleware/error.middleware.js";
+import friendsRoutes from "./friends/friends.routes.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(passport.initialize());
 app.use("/auth", authRoutes);
 app.use("/games", gamesRoutes);
 app.use("/users", usersRoutes);
+app.use("/friends", friendsRoutes);
 
 app.get("/", (_req, res) => {
   res.send(

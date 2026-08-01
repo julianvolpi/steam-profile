@@ -1,7 +1,8 @@
 export type SteamEndpoint =
   | "GetFriendList"
   | "GetOwnedGames"
-  | "GetPlayerSummaries";
+  | "GetPlayerSummaries"
+  | "GetRecentlyPlayedGames";
 
 export interface SteamOwnedGame {
   appid: number;
@@ -70,6 +71,13 @@ export interface SteamFriendsResponse {
 export interface SteamOwnedGamesResponse {
   response: {
     game_count: number;
+    games: SteamOwnedGame[];
+  };
+}
+
+export interface SteamRecentlyPlayedGamesResponse {
+  response: {
+    total_count: number;
     games: SteamOwnedGame[];
   };
 }

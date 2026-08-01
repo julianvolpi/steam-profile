@@ -6,16 +6,12 @@ import authRoutes from "./auth/auth.routes.js";
 import gamesRoutes from "./games/games.routes.js";
 import usersRoutes from "./users/users.routes.js";
 import friendsRoutes from "./friends/friends.routes.js";
+import { authMiddleware } from "./middleware/auth.middleware.js";
 
 const app = express();
 
 app.use(express.json());
 app.use(passport.initialize());
-
-app.use("/auth", authRoutes);
-app.use("/games", gamesRoutes);
-app.use("/users", usersRoutes);
-app.use("/friends", friendsRoutes);
 
 app.get("/", (_req, res) => {
   res.send(
@@ -26,6 +22,13 @@ app.get("/", (_req, res) => {
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
+
+app.use("/auth", authRoutes);
+
+app.use(authMiddleware);
+app.use("/games", gamesRoutes);
+app.use("/users", usersRoutes);
+app.use("/friends", friendsRoutes);
 
 app.use(errorHandler);
 

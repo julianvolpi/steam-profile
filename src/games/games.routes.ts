@@ -1,9 +1,9 @@
 import express from "express";
-import { getGames } from "./games.controller.js";
-import { authMiddleware } from "../middleware/auth.middleware.js";
+import { getGames, getRecentGames } from "./games.controller.js";
 
 const router = express.Router();
 
-router.get("/", authMiddleware, getGames);
+router.get("/", getGames);
+router.get("/recent", getRecentGames);
 
 export default router;

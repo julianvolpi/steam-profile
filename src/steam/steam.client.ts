@@ -3,11 +3,15 @@ import type {
   SteamFriendsResponse,
   SteamOwnedGamesResponse,
   SteamPlayerSummaryResponse,
+  SteamRecentlyPlayedGamesResponse,
 } from "./steam.types.js";
 import { getJson } from "./steam.http.js";
 import { env } from "../config/env.js";
 
-const buildUrl = (path: string, params: Record<string, string>): URL => {
+const buildUrl = (
+  path: string,
+  params: Record<string, string | undefined>,
+): URL => {
   const url = new URL(path, STEAM_API_BASE_URL);
   url.search = new URLSearchParams({
     ...params,
@@ -27,6 +31,21 @@ export const getOwnedGames = async (
   });
 
   return getJson<SteamOwnedGamesResponse>(url, "GetOwnedGames");
+};
+
+export const getRecentlyPlayedGames = async (
+  steamId: string,
+  count?: number,
+): Promise<SteamRecentlyPlayedGamesResponse> => {
+  const url = buildUrl("/IPlayerService/GetRecentlyPlayedGames/v0001/", {
+    steamid: steamId,
+    count: count?.toString(),
+  });
+
+  return getJson<SteamRecentlyPlayedGamesResponse>(
+    url,
+    "GetRecentlyPlayedGames",
+  );
 };
 
 export const getPlayerSummaries = async (

@@ -62,7 +62,7 @@ export const getPlayerFriends = async (
   steamId: string,
 ): Promise<SteamFriendsResponse> => {
   const url = buildUrl("/ISteamUser/GetFriendList/v0001/", {
-    steamid: "76561197997211756",
+    steamid: steamId,
     relationship: "friend",
   });
 

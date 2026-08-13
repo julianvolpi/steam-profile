@@ -2,7 +2,8 @@ export type SteamEndpoint =
   | "GetFriendList"
   | "GetOwnedGames"
   | "GetPlayerSummaries"
-  | "GetRecentlyPlayedGames";
+  | "GetRecentlyPlayedGames"
+  | "GetAppDetails";
 
 export interface SteamOwnedGame {
   appid: number;
@@ -22,6 +23,42 @@ export interface SteamOwnedGame {
   has_leaderboards?: boolean;
 
   content_descriptorids?: number[];
+}
+
+export interface SteamGenre {
+  id: string;
+  description: string;
+}
+
+export interface SteamCategory {
+  id: number;
+  description: string;
+}
+
+export interface SteamReleaseDate {
+  coming_soon: boolean;
+  date: string;
+}
+
+export interface SteamScreenshot {
+  id: number;
+  path_thumbnail: string;
+  path_full: string;
+}
+
+export interface SteamAppDetails {
+  steam_appid: number;
+  name: string;
+  short_description: string;
+  header_image: string;
+  developers: string[];
+  publishers: string[];
+  genres: SteamGenre[];
+  categories: SteamCategory[];
+  release_date: SteamReleaseDate;
+  website?: string;
+  background?: string;
+  screenshots?: SteamScreenshot[];
 }
 
 export interface SteamProfile {
@@ -72,6 +109,13 @@ export interface SteamOwnedGamesResponse {
   response: {
     game_count: number;
     games: SteamOwnedGame[];
+  };
+}
+
+export interface SteamStoreAppDetailsResponse {
+  [appId: string]: {
+    success: boolean;
+    data: SteamAppDetails;
   };
 }
 

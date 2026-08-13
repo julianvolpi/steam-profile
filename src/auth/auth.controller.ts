@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { getCurrentUser, loginWithSteam } from "./auth.service.js";
 import { createToken } from "../utils/jwt.js";
-import { fetchGames } from "../games/games.service.js";
+import { fetchUserGames } from "../games/games.service.js";
 
 export const callback = async (req: Request, res: Response) => {
   if (!req.user) {
@@ -19,8 +19,7 @@ export const callbackTest = async (req: Request, res: Response) => {
   }
   const steamUser = req.user;
   const user = await loginWithSteam(steamUser);
-  const token = createToken(user.id, user.steamId);
-  const games = await fetchGames(user.steamId);
+  const games = await fetchUserGames(user.steamId);
   return res.send(
     `<html>
       <body>
@@ -42,7 +41,6 @@ export const callbackTest = async (req: Request, res: Response) => {
       </body>
     </html>`,
   );
-  return res.json({ token });
 };
 
 export const me = async (req: Request, res: Response) => {

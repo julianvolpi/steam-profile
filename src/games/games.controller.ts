@@ -1,14 +1,28 @@
 import type { Request, Response } from "express";
-import { fetchGames, fetchRecentGames } from "./games.service.js";
+import {
+  fetchGameDetails,
+  fetchUserGames,
+  fetchUserRecentGames,
+} from "./games.service.js";
 
-export const getGames = async (req: Request, res: Response) => {
+export const getUserGames = async (req: Request, res: Response) => {
   const jwtPayload = req.auth;
-  const games = await fetchGames(jwtPayload.steamId);
+  const games = await fetchUserGames(jwtPayload.steamId);
   return res.json(games);
 };
 
-export const getRecentGames = async (req: Request, res: Response) => {
+export const getUserRecentGames = async (req: Request, res: Response) => {
   const jwtPayload = req.auth;
-  const games = await fetchRecentGames(jwtPayload.steamId);
+  const games = await fetchUserRecentGames(jwtPayload.steamId);
   return res.json(games);
+};
+
+export const getGameDetails = async (req: Request, res: Response) => {
+  const id = req.query.gameId as string | undefined;
+  if (!id) {
+    return res.status(400).json({ error: "Missing gameId parameter" });
+  }
+
+  const gameDetails = await fetchGameDetails(id);
+  return res.json(gameDetails);
 };

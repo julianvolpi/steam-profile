@@ -1,4 +1,7 @@
-import { getPlayerFriends, getPlayerSummaries } from "../steam/steam.client.js";
+import {
+  getPlayerFriends,
+  getPlayerSummaries,
+} from "../steam/steamApi.client.js";
 import { toUserProfile } from "../users/users.mapper.js";
 
 export const fetchFriends = async (steamId: string) => {

@@ -1,3 +1,4 @@
+import { SteamStoreError } from "../errors/steamStoreError.js";
 import {
   getOwnedGames,
   getRecentlyPlayedGames,
@@ -25,7 +26,11 @@ export const fetchGameDetails = async (gameId: string) => {
   const gameDetails = Object.values(appDetails)[0];
 
   if (!gameDetails?.success) {
-    throw new Error(`Failed to fetch details for gameId: ${gameDetails}`);
+    throw new SteamStoreError(
+      "The requested Steam app was not found.",
+      "GetAppDetails",
+      404,
+    );
   }
 
   const game = toStoreGame(gameDetails.data);

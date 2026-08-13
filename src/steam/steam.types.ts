@@ -1,9 +1,12 @@
-export type SteamEndpoint =
+export type SteamApiEndpoint =
   | "GetFriendList"
   | "GetOwnedGames"
   | "GetPlayerSummaries"
-  | "GetRecentlyPlayedGames"
-  | "GetAppDetails";
+  | "GetRecentlyPlayedGames";
+
+export type SteamStoreEndpoint = "GetAppDetails";
+
+export type SteamEndpoint = SteamApiEndpoint | SteamStoreEndpoint;
 
 export interface SteamOwnedGame {
   appid: number;
@@ -112,11 +115,19 @@ export interface SteamOwnedGamesResponse {
   };
 }
 
-export interface SteamStoreAppDetailsResponse {
-  [appId: string]: {
-    success: boolean;
-    data: SteamAppDetails;
-  };
+interface SteamAppDetailsSuccess {
+  success: true;
+  data: SteamAppDetails;
+}
+
+interface SteamAppDetailsFailure {
+  success: false;
+}
+
+type SteamAppDetailsResult = SteamAppDetailsSuccess | SteamAppDetailsFailure;
+
+export interface SteamAppDetailsResponse {
+  [appId: string]: SteamAppDetailsResult;
 }
 
 export interface SteamRecentlyPlayedGamesResponse {

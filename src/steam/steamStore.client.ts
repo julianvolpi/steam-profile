@@ -1,6 +1,6 @@
 import { STEAM_STORE_BASE_URL } from "./steam.constants.js";
 import { getJson } from "./steam.http.js";
-import type { SteamStoreAppDetailsResponse } from "./steam.types.js";
+import type { SteamAppDetailsResponse } from "./steam.types.js";
 
 const buildUrl = (path: string, params: Record<string, string>): URL => {
   const url = new URL(path, STEAM_STORE_BASE_URL);
@@ -12,10 +12,10 @@ const buildUrl = (path: string, params: Record<string, string>): URL => {
 
 export const getAppDetails = async (
   appId: string,
-): Promise<SteamStoreAppDetailsResponse> => {
+): Promise<SteamAppDetailsResponse> => {
   const url = buildUrl("/api/appdetails", {
     appids: appId,
   });
 
-  return getJson<SteamStoreAppDetailsResponse>(url, "GetAppDetails");
+  return getJson<SteamAppDetailsResponse>(url, "GetAppDetails");
 };
